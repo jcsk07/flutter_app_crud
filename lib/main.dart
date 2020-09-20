@@ -57,8 +57,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
+         label : Text('+',
+           style: TextStyle(fontSize: 30),
+         ),
         onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FormPage())),
+
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
