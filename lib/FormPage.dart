@@ -1,9 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FormPage extends StatelessWidget{
+class FormPage extends StatefulWidget{
+  @override
+  _FormPageState createState() => _FormPageState();
+}
+
+class _FormPageState extends State<FormPage> {
   final formKey = GlobalKey<FormState>();
+
   String _email,_password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +63,7 @@ class FormPage extends StatelessWidget{
         ),
       );
   }
+
   void _submit(){
     if(formKey.currentState.validate()){
       formKey.currentState.save();

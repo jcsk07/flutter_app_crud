@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import './FormPage.dart';
+import 'FormPage.dart';
+import 'GetUser.dart';
+import 'User.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -29,13 +32,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,18 +39,22 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      body: Container(
+        child: FutureBuilder(
+          future: fetchUsers(),
+          builder: (context,snapshot){
+            if(snapshot.hasData){
+              return ListView.builder(
+                itemCount: snapshot.data.length,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context,index){
+                  Users user = snapshot.data[index];
+                  return Text('${user.name}');
+                },
+              );
+            }
+            return CircularProgressIndicator();
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -66,7 +66,5 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-  Future navigateToFormPage(context) async {
 
-  }
 }
