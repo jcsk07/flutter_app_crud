@@ -4,6 +4,7 @@ import 'GetUser.dart';
 import 'User.dart';
 
 
+
 void main() {
   runApp(MyApp());
 }
@@ -61,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
          label : Text('+',
            style: TextStyle(fontSize: 30),
          ),
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FormPage())),
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FormPage()),).then((value) => setState(() {})),
 
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

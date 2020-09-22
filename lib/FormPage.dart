@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_crud/CreateUser.dart';
+import 'package:flutter_app_crud/User.dart';
 
 class FormPage extends StatefulWidget{
   @override
@@ -8,7 +10,7 @@ class FormPage extends StatefulWidget{
 
 class _FormPageState extends State<FormPage> {
   final formKey = GlobalKey<FormState>();
-
+  Users _user;
   String _email,_password;
 
   @override
@@ -46,12 +48,16 @@ class _FormPageState extends State<FormPage> {
                             child:  RaisedButton(
                               onPressed: _submit,
                               child: Text('Sign In'),
+
                             ),
                           )
                         ],
-                      )
+                      ),
+                      SizedBox(height: 32,),
+                      if (_user == null) Container() else Text("The user ${_user.name} \n and passwords is ${_user.password}" ),
                     ],
-                  )
+                  ),
+
               ),
             ),
         )
@@ -64,11 +70,15 @@ class _FormPageState extends State<FormPage> {
       );
   }
 
-  void _submit(){
+  Future<void> _submit() async {
     if(formKey.currentState.validate()){
       formKey.currentState.save();
       print(_email);
       print(_password);
+      final Users user = await createUser(_email, _password);
+      setState(() {
+        _user = user;
+      });
     }
   }
 }
