@@ -33,7 +33,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,11 +49,36 @@ class _MyHomePageState extends State<MyHomePage> {
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context,index){
                   Users user = snapshot.data[index];
-                  return Text('${user.name}');
+                  return Table(
+                    children: <TableRow>[
+                      TableRow(
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Container(
+                                child: Text('${user.name}'),
+                              )
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Container(
+                                child: Text('${user.password}'),
+                              )
+                            ],
+                          ),
+                        ]
+                      )
+                    ],
+                  );
                 },
               );
             }
-            return CircularProgressIndicator();
+            return Center(
+                child: CircularProgressIndicator(),
+            );
           },
         ),
       ),
